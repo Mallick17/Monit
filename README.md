@@ -453,5 +453,9 @@ Verify that Monit is running with the new configuration.
 sudo monit status
 ```
 
+#### 13. Accessing the Monit Web Interface
+After completing the setup, you can access the Monit web interface by navigating to `http://13.233.154.166:2812/` in your web browser. You will be prompted to enter the `username (admin)` and `password (monit)` as configured in the monitrc file.
+![image](https://github.com/user-attachments/assets/12e843c6-fa55-42e1-adb5-c28c8066c7be)
+
 
 
