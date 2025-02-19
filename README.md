@@ -12,6 +12,10 @@
 - **Network communication requirements**: M/Monit communicate with Monit agents on TCP port 2812. If there is a NAT or PAT (port translation) between M/Monit and Monit, you will need to setup host information in M/Monit so M/Monit can connect to Monit over the network. This can be specified in the admin/hosts page in M/Monit. Otherwise M/Monit will use the host information it receive from Monit when Monit automatically registered itself in M/Monit.
   ![image](https://github.com/user-attachments/assets/3c0862c6-7da0-4e4f-af65-8845adfee9b2)
 
+### Architecture Overview
+![image](https://github.com/user-attachments/assets/7d6eba5e-ea60-4bfa-adae-bab5c2850719)
+- Monit is a small, powerful monitoring program that runs on each host monitored by M/Monit. With regular intervals, Monit will send a message to M/Monit with the status of the host it is running on. If a service fails or Monit has to perform an action to fix a problem, an event message is sent to M/Monit at once. Both status and event messages are stored in a database. Upon receiving an event message from Monit, M/Monit will consult its rule-set and perform an alert notification if a rule matched.
+- From M/Monit, you can start, stop and restart services on any of your hosts running Monit.
 
 ### Benefits
 - Your computer systems will have a higher uptime as M/Monit can handle error conditions automatically, often without the need for human intervention.
