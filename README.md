@@ -948,7 +948,8 @@ include /etc/monit/conf-enabled/*
    sudo service nginx stop
    ```
 
-   Monit should detect that Nginx is down and send an email alert to the specified address.
+- Monit should detect that Nginx is down and send an email alert to the specified address.
+![image](https://github.com/user-attachments/assets/23f48b3c-7e35-4b3d-bb40-01fdd149235b)
 
 ---
 
