@@ -461,7 +461,7 @@ sudo monit status
 After completing the setup, you can access the Monit web interface by navigating to `http://13.233.154.166:2812/` in your web browser. You will be prompted to enter the `username (admin)` and `password (monit)` as configured in the monitrc file.
 ![image](https://github.com/user-attachments/assets/12e843c6-fa55-42e1-adb5-c28c8066c7be)
 
-## Explanation of `/etc/monit/conf.d` and Monit Configuration
+## Explanation of `/etc/monit/conf.d` and Configuration of Monit for Monitoring a Running Process & Send E-Mail Alerts if it Fails
 
 The `/etc/monit/conf.d` directory is where Monit stores its configuration files. Monit uses these files to define how it monitors and manages services on your system. Each file in this directory typically corresponds to a specific service or process that Monit is monitoring.
 
@@ -478,6 +478,41 @@ check process nginx with pidfile /run/nginx.pid
 - **`start program = "/usr/sbin/service nginx start" with timeout 60 seconds`**: If Monit detects that Nginx is not running, it will attempt to start it using the specified command.
 - **`stop program = "/usr/sbin/service nginx stop"`**: If Monit needs to stop Nginx, it will use this command.
 - **`if failed host 127.0.0.1 port 80 protocol http then alert`**: Monit will check if Nginx is responding to HTTP requests on `localhost` (port 80). If it fails, Monit will trigger an alert.
+
+1. **Create a Configuration File**:
+   Create a new file in `/etc/monit/conf.d/` for the process you want to monitor. For example, to monitor Nginx:
+
+   ```bash
+   sudo nano /etc/monit/conf.d/nginx
+   ```
+
+2. **Add the Monitoring Configuration**:
+   Add the following configuration to monitor Nginx:
+
+   ```plaintext
+   check process nginx with pidfile /run/nginx.pid
+       start program = "/usr/sbin/service nginx start" with timeout 60 seconds
+       stop program = "/usr/sbin/service nginx stop"
+       if failed host 127.0.0.1 port 80 protocol http then alert
+   ```
+
+3. **Reload Monit**:
+   Reload Monit to apply the new configuration:
+
+   ```bash
+   sudo monit reload
+   ```
+
+4. **Verify Monitoring**:
+   Check the status of the monitored process:
+
+   ```bash
+   sudo monit status
+   ```
+
+   You should see the status of the Nginx process and any alerts if it fails.
+
+---
 
 ---
 # Configure Monit to send Mail Alerts
@@ -917,45 +952,6 @@ include /etc/monit/conf-enabled/*
 
 ---
 
-### Configuration for Monitoring a Running Process
-
-Here’s an example of how to monitor a running process (e.g., `nginx`) and send email alerts if it fails:
-
-1. **Create a Configuration File**:
-   Create a new file in `/etc/monit/conf.d/` for the process you want to monitor. For example, to monitor Nginx:
-
-   ```bash
-   sudo nano /etc/monit/conf.d/nginx
-   ```
-
-2. **Add the Monitoring Configuration**:
-   Add the following configuration to monitor Nginx:
-
-   ```plaintext
-   check process nginx with pidfile /run/nginx.pid
-       start program = "/usr/sbin/service nginx start" with timeout 60 seconds
-       stop program = "/usr/sbin/service nginx stop"
-       if failed host 127.0.0.1 port 80 protocol http then alert
-   ```
-
-3. **Reload Monit**:
-   Reload Monit to apply the new configuration:
-
-   ```bash
-   sudo monit reload
-   ```
-
-4. **Verify Monitoring**:
-   Check the status of the monitored process:
-
-   ```bash
-   sudo monit status
-   ```
-
-   You should see the status of the Nginx process and any alerts if it fails.
-
----
-
 ### Documentation Summary
 
 1. **`/etc/monit/conf.d`**: Directory containing Monit configuration files for individual services.
@@ -968,4 +964,3 @@ Here’s an example of how to monitor a running process (e.g., `nginx`) and send
    - Define start/stop commands and failure conditions.
    - Reload Monit to apply changes.
 
-Let me know if you need further clarification or assistance!
