@@ -856,9 +856,48 @@ include /etc/monit/conf-enabled/*
    - **`from`**: The sender's email address.
    - **`subject`**: The subject line of the email.
    - **`message`**: The body of the email.
+   - Save the changes and exit the text editor.
+### 5.Configure GMail to send mail alerts from `monit`
+#### App Password
+- If you have 2-Step Verification enabled on your Google account, you cannot use your regular Google account password. Instead, you need to generate an **App Password** specifically for M/Monit.
+  
+<details>
+  <summary>Click to view CONFIGURATION of GMAIL to SEND MAIL ALERTS through M/MONIT</summary>
 
-#### 5. **Save and Close the File**:
-   Save the changes and exit the text editor.
+#### 1. **Generate an App Password (if 2-Step Verification is enabled)**:
+   - Go to your [Google Account](https://myaccount.google.com/).
+   - Navigate to **Security** > **2-Step Verification** (enable it if not already enabled).
+   - Scroll down to **App Passwords** and generate a new app password.
+   - Use this app password in your USE NAME AS `M/Monit` configuration instead of your regular Gmail password.
+
+#### 3. **Update M/Monit Configuration**:
+   Update your M/Monit configuration file (`monitrc`) with the correct credentials. For example:
+
+   ```plaintext
+   set mailserver smtp.gmail.com port 587
+       username "gyanaranjanmallick444@gmail.com" password "your_app_password"
+       using tls
+   ```
+
+   Replace `your_app_password` with the appropriate password (app password if 2-Step Verification is enabled).
+
+#### 4. **Restart M/Monit**:
+   After updating the configuration, restart M/Monit to apply the changes:
+
+   ```bash
+   sudo monit restart
+   ```
+
+#### 5. **Test the Configuration**:
+   Send a test alert to verify that the email notifications are working.
+
+---
+
+### Additional Notes:
+- If you're using a firewall, ensure that outbound traffic on port 587 is allowed in the security group.
+
+</details>
+
 
 #### 6. **Reload Monit**:
    After making changes to the configuration, reload Monit to apply the new settings:
