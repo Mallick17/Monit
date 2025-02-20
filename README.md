@@ -511,10 +511,11 @@ check process nginx with pidfile /run/nginx.pid
    ```
 
    You should see the status of the Nginx process and any alerts if it fails.
+![image](https://github.com/user-attachments/assets/82ded546-061b-4481-8910-989accc39395)
+
 
 ---
 
----
 # Configure Monit to send Mail Alerts
 
 ### Setting Up Monit to Send Email Alerts
