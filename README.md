@@ -1048,3 +1048,18 @@ include /etc/monit/conf-enabled/*
    - Define start/stop commands and failure conditions.
    - Reload Monit to apply changes.
 
+---
+
+## **SystemD vs Monit vs Supervisor**
+
+| Feature                | SystemD                          | Monit                             | Supervisor                       |
+|------------------------|----------------------------------|-----------------------------------|----------------------------------|
+| **Purpose**            | System and service manager.      | Process monitoring and recovery.  | Process control and monitoring.  |
+| **Ease of Use**        | Complex, powerful.               | Simple, lightweight.              | Simple, focused on processes.    |
+| **Centralization**     | No centralization.               | No centralization.                | No centralization.               |
+| **Email Alerts**       | Requires custom scripts.         | Built-in email alerts.            | Requires custom scripts.         |
+| **Web Interface**      | No built-in web interface.       | Built-in web interface (M/Monit). | Built-in web interface.          |
+| **Resource Usage**     | High (manages entire system).    | Low.                              | Low.                             |
+| **Use Case**           | System-wide service management.  | Single-host process monitoring.   | Single-host process management.  |
+
+---
